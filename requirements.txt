@@ -1,0 +1,8 @@
+Flask
+Flask-Cors
+Flask-SQLAlchemy
+nose2
+pydantic
+SQLAlchemy
+SQLAlchemy-Utils
+typing_extensions
