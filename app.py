@@ -36,6 +36,11 @@ def add_assistente_terapeutico(form: AssistenteTerapeuticoSchema):
     assistente_terapeutico = AssistenteTerapeutico(
         nome = form.nome,
         telefone = form.telefone,
+        cep = form.cep,
+        rua = form.rua, 
+        numero = form.numero,
+        complemento = form.complemento,
+        bairro = form.bairro,
         cidade = form.cidade,
         estado = form.estado)
     logger.debug(f"Adicionando assistente_terapeutico de nome: '{assistente_terapeutico.nome}'")

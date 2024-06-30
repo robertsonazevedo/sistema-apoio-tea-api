@@ -5,8 +5,13 @@ from models.assistente_terapeutico import AssistenteTerapeutico
 class AssistenteTerapeuticoSchema(BaseModel):
     """ Define como um novo produto a ser inserido deve ser representado
     """
-    nome: str = "Banana Prata"
-    telefone: int = 123456789
+    nome: str = "Robertson Azevedo"
+    telefone: Optional[int] = 123456789
+    cep: int = 21999988
+    rua: str = "Rua 1"
+    numero: Optional[int] = 100
+    complemento: Optional[str] = "A"
+    bairro: str = "Centro"
     cidade: str = "Rio de Janeiro"
     estado: str = "RJ"
 
@@ -30,6 +35,11 @@ def apresenta_assistentes_terapeuticos(assistentes_terapeuticos: List[Assistente
         result.append({
             "nome": assistente_terapeutico.nome,
             "telefone": assistente_terapeutico.telefone,
+            "cep": assistente_terapeutico.cep,
+            "rua": assistente_terapeutico.rua,
+            "numero": assistente_terapeutico.numero,
+            "complemento": assistente_terapeutico.complemento,
+            "bairro": assistente_terapeutico.bairro,
             "cidade": assistente_terapeutico.cidade,
             "estado": assistente_terapeutico.estado,
         })
@@ -42,6 +52,11 @@ class AssistenteTerapeuticoViewSchema(BaseModel):
     id: int = 1
     nome: str = "Robertson"
     telefone: int = 2199998888
+    cep: int = 21999988
+    rua: str = "Rua 1"
+    numero: int = 100
+    complemento: Optional[str] = "A"
+    bairro: str = "Centro"
     cidade: str = "Rio de Janeiro"
     estado: str = "RJ"
 
@@ -60,6 +75,11 @@ def apresenta_assistente_terapeutico(assistente_terapeutico: AssistenteTerapeuti
         "id": assistente_terapeutico.id,
         "nome": assistente_terapeutico.nome,
         "telefone": assistente_terapeutico.telefone,
+        "cep": assistente_terapeutico.cep,
+        "rua": assistente_terapeutico.rua,
+        "numero": assistente_terapeutico.numero,
+        "complemento": assistente_terapeutico.complemento,
+        "bairro": assistente_terapeutico.bairro,
         "cidade": assistente_terapeutico.cidade,
         "estado": assistente_terapeutico.estado
     }
