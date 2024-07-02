@@ -21,6 +21,24 @@ class AssistenteTerapeuticoBuscaSchema(BaseModel):
     """
     nome: str = "Robertson"
 
+class AssistenteTerapeuticoBuscaEstadoSchema(BaseModel):
+    """ Define como deve ser a estrutura que representa a busca. Que será
+        feita apenas com base no nome do produto.
+    """
+    estado: str = "RJ"
+
+class AssistenteTerapeuticoBuscaCidadeSchema(BaseModel):
+    """ Define como deve ser a estrutura que representa a busca. Que será
+        feita apenas com base no nome do produto.
+    """
+    cidade: str = "São Gonçalo"
+
+class AssistenteTerapeuticoBuscaBairroSchema(BaseModel):
+    """ Define como deve ser a estrutura que representa a busca. Que será
+        feita apenas com base no nome do produto.
+    """
+    bairro: str = "Mutondo"
+
 class ListagemAssistenteTerapeuticoSchema(BaseModel):
     """ Define como uma listagem de produtos será retornada.
     """
