@@ -1,4 +1,4 @@
-from amodels.base import Base
+from models.base import Base
 from models.pessoa import Pessoa
 from sqlalchemy.ext.declarative import AbstractConcreteBase
 from datetime import datetime

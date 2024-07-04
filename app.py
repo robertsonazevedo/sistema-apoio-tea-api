@@ -16,7 +16,6 @@ CORS(app)
 # definindo tags
 home_tag = Tag(name="Documentação", description="Seleção de documentação: Swagger, Redoc ou RapiDoc")
 assistente_terapeutico_tag = Tag(name="Assistente Terapeutico", description="Adição, visualização e remoção de assistentes terapeuticos à base")
-comentario_tag = Tag(name="Comentario", description="Adição de um comentário à um produtos cadastrado na base")
 
 
 @app.get('/', tags=[home_tag])
@@ -29,9 +28,9 @@ def home():
 @app.post('/assistente_terapeutico', tags=[assistente_terapeutico_tag],
           responses={"200": AssistenteTerapeuticoViewSchema, "409": ErrorSchema, "400": ErrorSchema})
 def add_assistente_terapeutico(form: AssistenteTerapeuticoSchema):
-    """Adiciona um novo Produto à base de dados
+    """Adiciona um novo Assistente Terapêutico à base de dados
 
-    Retorna uma representação dos assistentes terapeuticos e comentários associados.
+    Retorna uma representação dos assistentes terapeuticos.
     """
     assistente_terapeutico = AssistenteTerapeutico(
         nome = form.nome,
@@ -72,7 +71,7 @@ def add_assistente_terapeutico(form: AssistenteTerapeuticoSchema):
 def get_assistentes_terapeuticos():
     """Faz a busca por todos os assistentes terapeuticos cadastrados
 
-    Retorna uma representação da listagem de assistentes terapeuticos.
+    Retorna uma representação da listagem de todos assistentes terapeuticos.
     """
     logger.debug(f"Coletando assistentes terapeuticos")
     # criando conexão com a base
@@ -81,11 +80,11 @@ def get_assistentes_terapeuticos():
     assistentes_terapeuticos = session.query(AssistenteTerapeutico).all()
 
     if not assistentes_terapeuticos:
-        # se não há produtos cadastrados
+        # se não há assistentes terapeuticos cadastrados
         return {"assistentes_terapeuticos": []}, 200
     else:
         logger.debug(f"%d Assistentes terapeuticos econtrados" % len(assistentes_terapeuticos))
-        # retorna a representação de produto
+        # retorna a lista de assistentes terapeuticos encontrados.
         print(assistentes_terapeuticos)
         return apresenta_assistentes_terapeuticos(assistentes_terapeuticos), 200
 
@@ -93,9 +92,9 @@ def get_assistentes_terapeuticos():
 @app.get('/assistente_terapeutico', tags=[assistente_terapeutico_tag],
          responses={"200": AssistenteTerapeuticoViewSchema, "404": ErrorSchema})
 def get_assistente_terapeutico(query: AssistenteTerapeuticoBuscaSchema):
-    """Faz a busca por um assistente terapeutico a partir da cidade solicitada
+    """Faz a busca por um assistente terapeutico a partir do nome.
 
-    Retorna uma representação dos assistentes terapeuticos e comentários associados.
+    Retorna uma representação dos assistentes terapeuticos com o nome buscado, somente o primeiro.
     """
     terapeuta_nome = query.nome
     logger.debug(f"Coletando dados sobre assistentes terapeuticoa #{terapeuta_nome}")
@@ -118,7 +117,7 @@ def get_assistente_terapeutico(query: AssistenteTerapeuticoBuscaSchema):
 @app.delete('/assistente_terapeutico', tags=[assistente_terapeutico_tag],
             responses={"200": AssistenteTerapeuticoDelSchema, "404": ErrorSchema})
 def del_assistente_terapeutico(query: AssistenteTerapeuticoBuscaSchema):
-    """Deleta um assistente terapeutico a partir do nome de assistente terapeutico informado
+    """Deleta um assistente terapeutico a partir do nome informado.
 
     Retorna uma mensagem de confirmação da remoção.
     """
@@ -145,70 +144,61 @@ def del_assistente_terapeutico(query: AssistenteTerapeuticoBuscaSchema):
 @app.get('/assistentes_terapeuticos_estado', tags=[assistente_terapeutico_tag],
          responses={"200": ListagemAssistenteTerapeuticoSchema, "404": ErrorSchema})
 def get_assistentes_terapeuticos_UF(query: AssistenteTerapeuticoBuscaEstadoSchema):
-    """Faz a busca por todos os assistentes terapeuticos cadastrados
+    """Faz a busca por todos os assistentes terapeuticos usar a UF do estado.
 
-    Retorna uma representação da listagem de assistentes terapeuticos.
+    Retorna uma representação da listagem de assistentes terapeuticos por estado.
     """
     terapeuta_estado = query.estado
-    logger.debug(f"Coletando assistentes terapeuticos")
+    logger.debug(f"Coletando assistentes terapeuticos por estado - UF")
     # criando conexão com a base
     session = Session()
     # fazendo a busca
     assistentes_terapeuticos_estado = session.query(AssistenteTerapeutico).filter(AssistenteTerapeutico.estado == terapeuta_estado).all()
 
     if not assistentes_terapeuticos_estado:
-        # se não há produtos cadastrados
+        # se não há assistentes terapeuticos cadastrados
         return {"assistentes_terapeuticos_estado": []}, 200
     else:
         logger.debug(f"%d Assistentes terapeuticos encontrados" % len(assistentes_terapeuticos_estado))
         # retorna a representação de produto
         print(assistentes_terapeuticos_estado)
         return apresenta_assistentes_terapeuticos(assistentes_terapeuticos_estado), 200
-
-
-@app.get('/assistentes_terapeuticos_cidade', tags=[assistente_terapeutico_tag],
-         responses={"200": ListagemAssistenteTerapeuticoSchema, "404": ErrorSchema})
-def get_assistentes_terapeuticos_cidade(query: AssistenteTerapeuticoBuscaCidadeSchema):
-    """Faz a busca por todos os assistentes terapeuticos cadastrados
-
-    Retorna uma representação da listagem de assistentes terapeuticos.
-    """
-    terapeuta_cidade = query.cidade
-    logger.debug(f"Coletando assistentes terapeuticos")
-    # criando conexão com a base
-    session = Session()
-    # fazendo a busca
-    assistentes_terapeuticos_cidade = session.query(AssistenteTerapeutico).filter(AssistenteTerapeutico.cidade == terapeuta_cidade).all()
-
-    if not assistentes_terapeuticos_cidade:
-        # se não há produtos cadastrados
-        return {"assistentes_terapeuticos_estado": []}, 200
-    else:
-        logger.debug(f"%d Assistentes terapeuticos encontrados" % len(assistentes_terapeuticos_cidade))
-        # retorna a representação de produto
-        print(assistentes_terapeuticos_cidade)
-        return apresenta_assistentes_terapeuticos(assistentes_terapeuticos_cidade), 200
     
 
-@app.get('/assistentes_terapeuticos_bairro', tags=[assistente_terapeutico_tag],
-         responses={"200": ListagemAssistenteTerapeuticoSchema, "404": ErrorSchema})
-def get_assistentes_terapeuticos_bairro(query: AssistenteTerapeuticoBuscaBairroSchema):
-    """Faz a busca por todos os assistentes terapeuticos cadastrados
 
-    Retorna uma representação da listagem de assistentes terapeuticos.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@app.get('/assistentes_terapeuticos_ufs', tags=[assistente_terapeutico_tag],
+         responses={"200": ListagemUfAssistenteTerapeuticoSchema, "404": ErrorSchema})
+def get_assistentes_terapeuticos_ufs():
+    """Faz a busca por todos os assistentes terapeuticos usar a UF do estado.
+
+    Retorna uma representação da listagem de assistentes terapeuticos por estado.
     """
-    terapeuta_bairro = query.bairro
-    logger.debug(f"Coletando assistentes terapeuticos")
+    logger.debug(f"Coletando lista de UFs de assistente terapeuticos cadastrados")
     # criando conexão com a base
     session = Session()
     # fazendo a busca
-    assistentes_terapeuticos_bairro = session.query(AssistenteTerapeutico).filter(AssistenteTerapeutico.bairro == terapeuta_bairro).all()
+    assistentes_terapeuticos_uf = session.query(AssistenteTerapeutico.estado).distinct()
 
-    if not assistentes_terapeuticos_bairro:
-        # se não há produtos cadastrados
+    if not assistentes_terapeuticos_uf:
+        # se não há assistentes terapeutico com UF cadastrada
         return {"assistentes_terapeuticos_estado": []}, 200
     else:
-        logger.debug(f"%d Assistentes terapeuticos encontrados" % len(assistentes_terapeuticos_bairro))
-        # retorna a representação de produto
-        print(assistentes_terapeuticos_bairro)
-        return apresenta_assistentes_terapeuticos(assistentes_terapeuticos_bairro), 200
+        # retorna a representação da lista de UFs de terapeutas existentes no database
+        print(assistentes_terapeuticos_uf)
+        return apresenta_ufs_assistentes_terapeuticos(assistentes_terapeuticos_uf), 200
