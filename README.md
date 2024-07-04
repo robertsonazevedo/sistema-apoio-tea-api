@@ -20,6 +20,15 @@ O sistema prevê também, no futuro, incluir neuroatípicos em geral.
 
 Link para o frontend: https://github.com/robertsonazevedo/sistema-apoio-tea-front
 
+### 📋 Esquema de banco de dados previsto para aplicação
+
+* Esquema de banco de dados conceitual
+![alt text](images/esquema-banco-conceitual.png)
+
+* Esquema de banco de dados físico
+![alt text](images/esquema-banco-fisico.png)
+
+
 ### 📋 Pré-requisitos
 
 - Python3
@@ -88,6 +97,15 @@ Se tudo seguir como esperado, no navegador terá a tela inicial com a documenta�
 ## ⚙️ Executando os testes
 
 Para testar o sistema em seu navegador, você precisará baixar o repositório do Github do front do sistema-apoio-tea-fron, no link: https://github.com/robertsonazevedo/sistema-apoio-tea-api
+
+### 📋 Melhorias Futuras
+
+- Permitir médicos, psicólogos e terapeutas ocupacionais se cadastrarem.
+- Permitir Terapeutas registrarem históricos.
+- Consultar a formação dos profissionais nos órgãos e instituições de formação via chamada de API.
+- Pagamento pela plataforma junto com o agendamento.
+- Localização do autista via gps.
+- Permitir contratante avaliar terapeuta.
 
 ## 🛠️ Construído com
 
