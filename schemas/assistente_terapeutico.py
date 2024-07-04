@@ -6,8 +6,8 @@ class AssistenteTerapeuticoSchema(BaseModel):
     """ Define como um novo terapeuta deve inserido e ser representado
     """
     nome: str = "Robertson Azevedo"
-    telefone: Optional[int] = 123456789
-    cep: int = 21999988
+    telefone: Optional[int] = 2199995555
+    cep: int = 24452001
     rua: str = "Rua 1"
     numero: Optional[int] = 100
     complemento: Optional[str] = "A"
@@ -91,23 +91,14 @@ def apresenta_assistente_terapeutico(assistente_terapeutico: AssistenteTerapeuti
     }
 
 
-
-
-
-
-
-
-
-
-
 class ListagemUfAssistenteTerapeuticoSchema(BaseModel):
-    """ Define como uma listagem de terapeutas será retornada.
+    """ Define como uma listagem de UF de terapeutas cadastrados será retornada.
     """
     assistentes_terapeuticos_uf:List[AssistenteTerapeuticoSchema]
 
 def apresenta_ufs_assistentes_terapeuticos(assistentes_terapeuticos_uf: List[AssistenteTerapeutico]):
-    """ Retorna uma representação do terapeuta seguindo o schema definido em
-        AssitenteTerapeuticoViewSchema.
+    """ Retorna uma representação de UF de terapeutas cadastrasdos seguindo o schema definido em
+        AssitenteTerapeuticoViewSchema, apenas as UF.
     """
     result = []
     for assistente_terapeutico in assistentes_terapeuticos_uf:

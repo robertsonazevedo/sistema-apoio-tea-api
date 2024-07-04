@@ -165,29 +165,12 @@ def get_assistentes_terapeuticos_UF(query: AssistenteTerapeuticoBuscaEstadoSchem
         return apresenta_assistentes_terapeuticos(assistentes_terapeuticos_estado), 200
     
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @app.get('/assistentes_terapeuticos_ufs', tags=[assistente_terapeutico_tag],
          responses={"200": ListagemUfAssistenteTerapeuticoSchema, "404": ErrorSchema})
 def get_assistentes_terapeuticos_ufs():
     """Faz a busca por todos os assistentes terapeuticos usar a UF do estado.
 
-    Retorna uma representação da listagem de assistentes terapeuticos por estado.
+    Retorna uma representação da listagem de UF de assistentes terapeuticos.
     """
     logger.debug(f"Coletando lista de UFs de assistente terapeuticos cadastrados")
     # criando conexão com a base
