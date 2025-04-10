@@ -60,7 +60,7 @@ Quando terminar de usar, basta dar o comando "deactivate" para encerrar o termin
 deactivate
 ```
 
-Para instruções de como ativar o venv no Linux, seguir a documentação: https://docs.python.org/3/library/venv.html
+Para instruções de como ativar o venv no Windows, seguir a documentação: https://docs.python.org/3/library/venv.html
 
 ### 🔧 Instalação
 
