@@ -29,11 +29,16 @@ Link para o frontend: https://github.com/robertsonazevedo/sistema-apoio-tea-fron
 ![alt text](images/esquema-banco-fisico.png)
 
 
+### 📋 Arquitetura do Sistema
+
+<img src="diagramas/sistema-apoio-tea-cadastro-terapeuta.png" alt="Diagrama Cadastro Terapeuta" width="1000" height="400">
+
 ### 📋 Pré-requisitos
 
 - Python3
 - Recomendamos utilizar o venv, que é um ambiente virtualizado para executar aplicações Python. Mais informações aqui: https://docs.python.org/3/library/venv.html
 - A instalação do venv é opcional, você poderá executar diretamente em sua máquina também.
+- Se for usar container Docker, você precisará ter o Docker instalado em sua máquina.
 
 Exemplo de uso do ambiente virtual "venv" no Linux (É necessário estar na raiz do projeto).
 
@@ -67,7 +72,7 @@ Debian, Ubuntu e distros baseadas nos mesmos:
 sudo apt-get install python3.10
 ```
 
-RedHat, CentOs e distros baseadas nos mesmos:
+RedHat, CentOs e distros baseadas nos mesmos:   
 
 ```
 sudo yum install python3.10
@@ -94,9 +99,30 @@ http://localhost:5000/#/
 ```
 Se tudo seguir como esperado, no navegador terá a tela inicial com a documentação da API, neste caso vamos usar o Swagger para testes, escolha esta opção no navegador.
 
+### 🔧 Execução da API com container Docker
+
+Caso não queira fazer todo processo de instalação em sua máquina, você poderá subir a API em docker, é bem simples e basta ter o docker instalado em sua máquina. Uma vez o docker instalado em sua máquina, basta seguir os passos abaixo:
+
+Buildar a Imagem (Lembre-se de estar na raiz do projeto, no mesmo diretório onde está o arquivo Dockerfile):
+```
+docker build -t api-sistema-apoio-tea .
+```
+
+Executando a API com base na imagem criada acima (Neste comando, estamos persistindo os dados do banco localmente.):
+```
+docker run -p 5000:5000 -v $(pwd)/database.db:/app/database.db api-sistema-apoio-tea
+```
+
+Por fim, para começar a testar a API, abra o navegador no endereço abaixo:
+```
+http://localhost:5000/#/
+```
+
+
 ## ⚙️ Executando os testes
 
-Para testar o sistema em seu navegador, você precisará baixar o repositório do Github do front do sistema-apoio-tea-fron, no link: https://github.com/robertsonazevedo/sistema-apoio-tea-api
+Para testar o sistema em seu navegador de forma completa (front e backend), você precisará baixar o repositório do Github do front do sistema-apoio-tea-front, no link: https://github.com/robertsonazevedo/sistema-apoio-tea-front .
+Após, basta seguir as instruções de execução do front no Readme do mesmo.
 
 ### 📋 Melhorias Futuras
 
