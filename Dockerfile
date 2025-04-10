@@ -34,7 +34,7 @@ ENV FLASK_RUN_HOST=0.0.0.0
 ENV FLASK_ENV=production
 
 # Define volume opcional para persistência do SQLite
-VOLUME ["/app/database.db"]
+VOLUME ["/app/database"]
 
 # Comando padrão para iniciar a aplicação
 CMD ["flask", "run"]

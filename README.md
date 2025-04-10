@@ -110,7 +110,7 @@ docker build -t api-sistema-apoio-tea .
 
 Executando a API com base na imagem criada acima (Neste comando, estamos persistindo os dados do banco localmente.):
 ```
-docker run -p 5000:5000 -v $(pwd)/database.db:/app/database.db api-sistema-apoio-tea
+docker run -p 5000:5000 -v $(pwd)/database:/app/database api-sistema-apoio-tea
 ```
 
 Por fim, para começar a testar a API, abra o navegador no endereço abaixo:
